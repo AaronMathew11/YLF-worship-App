@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaUsers, FaCalendarAlt, FaGuitar, FaSearch, FaMicrophone, FaMusic, FaDrum, FaCopy, FaCheck, FaArrowLeft, FaHome, FaBuilding } from "react-icons/fa";
+import { FaUsers, FaCalendarAlt, FaSearch, FaCopy, FaCheck, FaArrowLeft, FaHome, FaBuilding } from "react-icons/fa";
 import { API_ENDPOINTS } from '../config/api';
 
 const Roster = ({ list, removeVideoFromList }) => {
@@ -78,29 +78,8 @@ const Roster = ({ list, removeVideoFromList }) => {
 
   useEffect(() => {
     fetchRoster();
-  }, [location]);
+  }, [location, fetchRoster]);
 
-
-  const getRoleIcon = (role) => {
-    const iconClass = "text-sm";
-    switch (role.toLowerCase()) {
-      case 'lead':
-      case 'lead/ lyrics/ posting':
-        return <FaMicrophone className={`${iconClass} text-primary-500`} />;
-      case 'guitar':
-        return <FaGuitar className={`${iconClass} text-accent-500`} />;
-      case 'bass':
-        return <FaMusic className={`${iconClass} text-blue-500`} />;
-      case 'keyboard':
-        return <FaMusic className={`${iconClass} text-purple-500`} />;
-      case 'drums':
-        return <FaDrum className={`${iconClass} text-red-500`} />;
-      case 'supporting vocals':
-        return <FaUsers className={`${iconClass} text-pink-500`} />;
-      default:
-        return <FaMusic className={`${iconClass} text-navy-500`} />;
-    }
-  };
 
   const copyRosterToClipboard = (day) => {
     let rosterText = `Worship Team Roster - ${day.Date}\n\n`;

@@ -1,12 +1,8 @@
 import React from 'react';
-import { FaHome, FaList, FaRegEdit, FaBook, FaChartBar } from 'react-icons/fa';
+import { FaHome, FaList, FaRegEdit, FaChartBar } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 
 const BottomNav = () => {
-  const { user } = useAuth();
-  // Check if user has admin role based on email
-  const adminEmails = ['admin@ylfworship.com', 'aaron@ylfworship.com', 'pastor@ylfworship.com'];
   const isAdmin = true; // Temporarily set to true for dev
 
   return (

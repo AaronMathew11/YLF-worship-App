@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaBook, FaFileAlt, FaCopy, FaStar, FaCheck } from 'react-icons/fa';
+import { FaCopy, FaCheck } from 'react-icons/fa';
 
 const MessageGeneratorPage = ({ selectedVideos }) => {
   const [theme, setTheme] = useState('');

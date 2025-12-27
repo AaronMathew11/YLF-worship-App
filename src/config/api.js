@@ -62,9 +62,11 @@ export const API_ENDPOINTS = {
   WEEKLY_ANALYTICS: getApiUrl('getWeeklyAnalytics')
 };
 
-export default {
+const apiConfig = {
   API_BASE_URL,
   API_ENDPOINTS,
   getApiUrl,
   getApiBaseUrl
 };
+
+export default apiConfig;

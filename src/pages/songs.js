@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FaMusic, FaExternalLinkAlt } from "react-icons/fa";
-import LogoutButton from "../Components/LogoutButton";
 import songImage from "../images/songsImage.png";
 import { API_ENDPOINTS } from '../config/api';
 

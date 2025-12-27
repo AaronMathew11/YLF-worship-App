@@ -48,13 +48,13 @@ const QuietTime = () => {
     } finally {
       setLoading(false);
     }
-  }, [token]);
+  }, [token, updateUser, user]);
 
   useEffect(() => {
     if (token) {
       fetchData();
     }
-  }, [token]);
+  }, [token, fetchData]);
 
   useEffect(() => {
     const handleKeyPress = (e) => {
