@@ -80,7 +80,7 @@ const List = ({ list, removeVideoFromList, reorderSongs }) => {
   return (
     <div className="min-h-screen pb-24 bg-gradient-to-b from-red-50 via-white to-red-50">
       {/* Red Gradient Header Section */}
-      <div className="bg-gradient-to-br from-red-500 via-red-600 to-red-700 text-white">
+      <div className="bg-primary text-white">
         <div className="max-w-md mx-auto px-4">
           <div className="text-center pt-8 pb-6 animate-fade-in">
             <h1 className="text-2xl font-bold text-white mb-2">My Worship List</h1>
