@@ -5,13 +5,10 @@ import axios from 'axios';
 import { API_ENDPOINTS } from '../config/api';
 
 const MemberAnalytics = () => {
-  const { user } = useAuth();
+  const { user, isAdmin, token } = useAuth();
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Check if user has admin role based on email
-  const adminEmails = ['admin@ylfworship.com', 'aaron@ylfworship.com', 'pastor@ylfworship.com'];
-  const isAdmin = true; // Temporarily set to true for dev
+  const [error, setError] = useState(null);
 
   // Mock data with all required metrics - will be replaced with MongoDB data
   const mockData = [
@@ -68,17 +65,21 @@ const MemberAnalytics = () => {
   ];
 
   useEffect(() => {
-    if (isAdmin) {
+    if (isAdmin && token) {
       fetchAnalyticsData();
     }
-  }, [isAdmin]);
+  }, [isAdmin, token]);
 
   const fetchAnalyticsData = async () => {
     try {
       setLoading(true);
       
-      // Try to fetch from MongoDB API
-      const response = await axios.get(API_ENDPOINTS.MEMBER_ANALYTICS);
+      // Try to fetch from MongoDB API with authentication
+      const response = await axios.get(API_ENDPOINTS.MEMBER_ANALYTICS, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       setMembers(response.data);
       setLoading(false);
     } catch (error) {
@@ -117,20 +118,20 @@ const MemberAnalytics = () => {
 
   const stats = getTeamStats();
 
-  // Temporarily disabled for dev - Show access denied for non-admin users
-  // if (!isAdmin) {
-  //   return (
-  //     <div className="page-container flex items-center justify-center min-h-screen">
-  //       <div className="text-center bg-white border-2 border-primary rounded-2xl p-8 mx-4">
-  //         <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-  //           <FaLock className="text-2xl text-red-500" />
-  //         </div>
-  //         <h3 className="text-lg font-black text-black mb-2">Access Restricted</h3>
-  //         <p className="text-gray-600 text-sm">Analytics is only available to admin users.</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  // Show access denied for non-admin users
+  if (!isAdmin) {
+    return (
+      <div className="page-container flex items-center justify-center min-h-screen">
+        <div className="text-center bg-white border-2 border-primary rounded-2xl p-8 mx-4">
+          <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <FaChartBar className="text-2xl text-red-500" />
+          </div>
+          <h3 className="text-lg font-black text-black mb-2">Access Restricted</h3>
+          <p className="text-gray-600 text-sm">Analytics is only available to admin users.</p>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (

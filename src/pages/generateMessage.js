@@ -58,13 +58,13 @@ const MessageGeneratorPage = ({ selectedVideos }) => {
   };
 
   return (
-    <div className="min-h-screen pb-24 bg-gray-50">
-      {/* Dark Header Section */}
-      <div className="bg-gray-900 text-white">
+    <div className="min-h-screen pb-24 bg-gradient-to-b from-red-50 via-white to-red-50">
+      {/* Red Gradient Header Section */}
+      <div className="bg-gradient-to-br from-red-500 via-red-600 to-red-700 text-white">
         <div className="max-w-md mx-auto px-4">
-          <div className="text-center pt-6 pb-4 animate-fade-in">
-            <h1 className="text-lg font-bold text-white mb-2">Message Generator</h1>
-            <p className="text-gray-300 text-xs max-w-sm mx-auto leading-relaxed">
+          <div className="text-center pt-8 pb-6 animate-fade-in">
+            <h1 className="text-2xl font-bold text-white mb-2">Message Generator</h1>
+            <p className="text-red-100 text-sm max-w-sm mx-auto leading-relaxed">
               Create beautiful worship announcements
             </p>
           </div>

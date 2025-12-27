@@ -78,13 +78,13 @@ const List = ({ list, removeVideoFromList, reorderSongs }) => {
   };
 
   return (
-    <div className="min-h-screen pb-24 bg-gray-50">
-      {/* Dark Header Section */}
-      <div className="bg-gray-900 text-white">
+    <div className="min-h-screen pb-24 bg-gradient-to-b from-red-50 via-white to-red-50">
+      {/* Red Gradient Header Section */}
+      <div className="bg-gradient-to-br from-red-500 via-red-600 to-red-700 text-white">
         <div className="max-w-md mx-auto px-4">
-          <div className="text-center pt-6 pb-4 animate-fade-in">
-            <h1 className="text-lg font-bold text-white mb-2">My Worship List</h1>
-            <p className="text-gray-300 text-xs max-w-sm mx-auto leading-relaxed">
+          <div className="text-center pt-8 pb-6 animate-fade-in">
+            <h1 className="text-2xl font-bold text-white mb-2">My Worship List</h1>
+            <p className="text-red-100 text-sm max-w-sm mx-auto leading-relaxed">
               Curate your perfect worship experience
             </p>
           </div>
@@ -113,16 +113,16 @@ const List = ({ list, removeVideoFromList, reorderSongs }) => {
       {/* Songs List */}
       {list.length === 0 ? (
         <div className="text-center py-8 animate-fade-in">
-          <div className="bg-white rounded-2xl p-6 max-w-sm mx-auto shadow-card">
-            <FaMusic className="text-3xl text-gray-400 mx-auto mb-3" />
-            <p className="text-gray-500 text-xs mb-2">No songs selected yet</p>
-            <p className="text-gray-400 text-xs">Browse song categories to build your list</p>
+          <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-8 max-w-sm mx-auto shadow-card border border-red-200">
+            <FaMusic className="text-4xl text-red-500 mx-auto mb-4" />
+            <p className="text-gray-700 text-sm font-medium mb-2">No songs selected yet</p>
+            <p className="text-gray-500 text-xs">Browse song categories to build your list</p>
           </div>
         </div>
       ) : (
         <div className="space-y-2 mb-6">
-          <div className="bg-white rounded-xl p-3 mb-4 shadow-card">
-            <p className="text-gray-500 text-xs text-center">
+          <div className="bg-gradient-to-r from-red-100 to-red-200 rounded-xl p-4 mb-4 shadow-card border border-red-300">
+            <p className="text-red-700 text-sm font-medium text-center">
               {list.length} song{list.length !== 1 ? 's' : ''} selected
             </p>
           </div>
@@ -148,7 +148,7 @@ const List = ({ list, removeVideoFromList, reorderSongs }) => {
                   >
                     <FaGripVertical />
                   </div>
-                  <div className="flex-shrink-0 w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center">
+                  <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-sm">
                     <span className="text-white text-xs font-medium">{index + 1}</span>
                   </div>
                   <div className="flex-1 min-w-0 text-left">
