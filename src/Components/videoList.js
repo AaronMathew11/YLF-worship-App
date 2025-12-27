@@ -29,13 +29,13 @@ function VideoList({ videos, title, addVideoToList, subtitle, selectedVideos = [
     };
 
     return (
-        <div className="min-h-screen pb-24 bg-gray-50">
-            {/* Dark Header Section */}
-            <div className="bg-gray-900 text-white">
+        <div className="min-h-screen pb-24 bg-gradient-to-b from-red-50 via-white to-red-50">
+            {/* Red Primary Header Section */}
+            <div className="bg-primary text-white">
                 <div className="max-w-md mx-auto px-4">
-                    <div className="text-center pt-6 pb-4 animate-fade-in">
-                        <h1 className="text-lg font-bold text-white mb-2">{title}</h1>
-                        <p className="text-gray-300 text-xs max-w-sm mx-auto leading-relaxed">{subtitle}</p>
+                    <div className="text-center pt-8 pb-6 animate-fade-in">
+                        <h1 className="text-2xl font-bold text-white mb-2">{title}</h1>
+                        <p className="text-red-100 text-sm max-w-sm mx-auto leading-relaxed">{subtitle}</p>
                     </div>
 
                     {/* Search Bar */}

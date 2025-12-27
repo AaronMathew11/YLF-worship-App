@@ -115,7 +115,7 @@ const MessageGeneratorPage = ({ selectedVideos }) => {
         <button 
           onClick={fetchBibleVerses} 
           disabled={!theme || !book || !chapter || !verse || isLoading}
-          className="w-full bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-xl text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+          className="w-full bg-primary hover:bg-red-600 text-white py-3 rounded-xl text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
         >
           {isLoading ? (
             <div className="flex items-center justify-center space-x-2">
