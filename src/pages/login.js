@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaBook, FaEnvelope, FaLock } from 'react-icons/fa';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config/api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +19,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await axios.post('https://us-central1-nfc-worship-app.cloudfunctions.net/api/api/login', {
+      const response = await axios.post(API_ENDPOINTS.LOGIN, {
         email,
         password
       });
@@ -37,12 +38,12 @@ const Login = () => {
       <div className="w-full max-w-md mx-8">
         <div className="animate-fade-in">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gray-900 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
               <FaBook className="text-2xl text-white" />
             </div>
-            <h1 className="section-header text-center mb-2">Welcome back</h1>
+            <h1 className="text-2xl font-black text-black text-center mb-2">Welcome back</h1>
             <p className="text-gray-500 text-sm">
-              Sign in to NFC South Worship App
+              Sign in to YLF Worship App
             </p>
           </div>
 

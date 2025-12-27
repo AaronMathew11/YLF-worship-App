@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaMusic, FaExternalLinkAlt } from "react-icons/fa";
 import LogoutButton from "../Components/LogoutButton";
 import songImage from "../images/songsImage.png";
+import { API_ENDPOINTS } from '../config/api';
 
 const Songs = () => {
   const [songs, setSongs] = useState([]);
@@ -26,7 +27,7 @@ const Songs = () => {
         setLoading(false);
       } else {
         try {
-          const response = await fetch("https://us-central1-nfc-worship-app.cloudfunctions.net/api/api/getSongs", {
+          const response = await fetch(API_ENDPOINTS.SONGS, {
             method: "GET",
             headers: new Headers({
               "ngrok-skip-browser-warning": "69420",

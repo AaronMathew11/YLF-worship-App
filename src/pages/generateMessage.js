@@ -76,7 +76,7 @@ const MessageGeneratorPage = ({ selectedVideos }) => {
       <div className="space-y-4 mb-6 pt-6 animate-slide-up">
         {/* Theme Input */}
         <div className="bg-white rounded-xl shadow-card p-4">
-          <h3 className="font-medium text-sm text-gray-900 mb-3">Worship Theme</h3>
+          <h3 className="section-header text-sm mb-3">Worship Theme</h3>
           <input
             type="text"
             placeholder="Enter worship theme..."
@@ -88,7 +88,7 @@ const MessageGeneratorPage = ({ selectedVideos }) => {
 
         {/* Bible Verse Input */}
         <div className="bg-white rounded-xl shadow-card p-4">
-          <h3 className="font-medium text-sm text-gray-900 mb-3">Scripture Reference</h3>
+          <h3 className="section-header text-sm mb-3">Scripture Reference</h3>
           <div className="grid grid-cols-3 gap-2">
             <input
               type="text"
@@ -133,7 +133,7 @@ const MessageGeneratorPage = ({ selectedVideos }) => {
         <div className="space-y-4 animate-fade-in">
           <div className="bg-white rounded-xl shadow-card p-4">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-medium text-sm text-gray-900">Generated Message</h3>
+              <h3 className="section-header text-sm">Generated Message</h3>
               <button
                 onClick={copyToClipboard}
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-xs transition-all duration-200 ${

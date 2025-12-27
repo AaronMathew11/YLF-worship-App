@@ -16,7 +16,7 @@ const LogoutButton = ({ className = '', showText = true, variant = 'header' }) =
     return (
       <button
         onClick={handleLogout}
-        className={`fixed top-4 right-4 z-40 w-12 h-12 bg-gray-900 hover:bg-gray-800 text-white rounded-2xl flex items-center justify-center transition-all duration-200 shadow-card hover:shadow-card-hover ${className}`}
+        className={`fixed top-4 right-4 z-40 w-12 h-12 bg-primary hover:bg-red-600 text-white rounded-2xl flex items-center justify-center transition-all duration-200 shadow-card hover:shadow-card-hover ${className}`}
         title="Logout"
       >
         <FaSignOutAlt className="text-lg" />

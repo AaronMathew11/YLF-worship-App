@@ -1,18 +1,32 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { FaUsers, FaCalendarAlt, FaGuitar, FaSearch, FaMicrophone, FaMusic, FaDrum, FaCopy, FaCheck } from "react-icons/fa";
+import { useParams, useNavigate } from "react-router-dom";
+import { FaUsers, FaCalendarAlt, FaGuitar, FaSearch, FaMicrophone, FaMusic, FaDrum, FaCopy, FaCheck, FaArrowLeft, FaHome, FaBuilding } from "react-icons/fa";
+import { API_ENDPOINTS } from '../config/api';
 
 const Roster = ({ list, removeVideoFromList }) => {
+  const { location } = useParams();
+  const navigate = useNavigate();
   const [roster, setRoster] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [copiedDays, setCopiedDays] = useState({});
 
+  const getLocationDetails = (locationId) => {
+    const locations = {
+      studio: { name: "Studio", icon: <FaBuilding className="text-lg" />, description: "Main worship studio" },
+      home1: { name: "Home 1", icon: <FaHome className="text-lg" />, description: "Worship at home location 1" },
+      home2: { name: "Home 2", icon: <FaHome className="text-lg" />, description: "Worship at home location 2" },
+      home3: { name: "Home 3", icon: <FaHome className="text-lg" />, description: "Worship at home location 3" }
+    };
+    return locations[locationId] || { name: "Unknown Location", icon: <FaUsers className="text-lg" />, description: "" };
+  };
+
   const filteredDays = roster
     .filter((day) => {
       const formattedDate = moment(day.Date, "Do MMMM YYYY");
       return (
-        formattedDate.isAfter(moment()) &&
+        formattedDate.isSameOrAfter(moment().subtract(30, 'days')) &&
         (
           day.Date.toLowerCase().includes(searchQuery.toLowerCase()) ||
           day["Lead/ Lyrics/ Posting"].toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -42,7 +56,7 @@ const Roster = ({ list, removeVideoFromList }) => {
     try {
       setLoading(true);
       
-      const response = await fetch(`https://us-central1-nfc-worship-app.cloudfunctions.net/api/api/getRoster?limit=1000`, {
+      const response = await fetch(`${API_ENDPOINTS.ROSTER_BY_LOCATION(location || "studio")}?limit=1000`, {
         method: "GET",
         headers: new Headers({
           "ngrok-skip-browser-warning": "69420",
@@ -64,7 +78,7 @@ const Roster = ({ list, removeVideoFromList }) => {
 
   useEffect(() => {
     fetchRoster();
-  }, []);
+  }, [location]);
 
 
   const getRoleIcon = (role) => {
@@ -115,16 +129,32 @@ const Roster = ({ list, removeVideoFromList }) => {
     }
   };
 
+  const locationInfo = getLocationDetails(location);
+
   return (
-    <div className="min-h-screen pb-24 bg-gray-50">
-      {/* Dark Header Section */}
-      <div className="bg-gray-900 text-white">
+    <div className="min-h-screen pb-24 bg-white">
+      {/* Header Section */}
+      <div className="bg-primary text-white">
         <div className="max-w-md mx-auto px-4">
-          <div className="text-center pt-6 pb-4 animate-fade-in">
-            <h1 className="text-lg font-bold text-white mb-2">Team Roster</h1>
-            <p className="text-gray-300 text-xs max-w-sm mx-auto leading-relaxed">
-              View worship team assignments and schedules
-            </p>
+          <div className="pt-6 pb-4 animate-fade-in">
+            {/* Back Button and Location Header */}
+            <div className="flex items-center space-x-3 mb-4">
+              <button
+                onClick={() => navigate('/roster-locations')}
+                className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center hover:bg-white/30 transition-colors duration-200"
+              >
+                <FaArrowLeft className="text-white text-sm" />
+              </button>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                  {locationInfo.icon}
+                </div>
+                <div>
+                  <h1 className="text-lg font-bold text-white">{locationInfo.name} Roster</h1>
+                  <p className="text-white/80 text-xs">{locationInfo.description}</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Search Bar */}
@@ -153,12 +183,12 @@ const Roster = ({ list, removeVideoFromList }) => {
             <p className="text-gray-500 text-sm">Loading roster...</p>
           </div>
         </div>
-      ) : roster.length === 0 ? (
+      ) : filteredDays.length === 0 ? (
         <div className="text-center py-12 animate-fade-in">
           <div className="bg-white rounded-2xl p-8 max-w-sm mx-auto shadow-card">
             <FaCalendarAlt className="text-4xl text-gray-400 mx-auto mb-4" />
             <p className="text-gray-500 text-sm">Roster not available</p>
-          </div>
+            <p className="text-gray-400 text-xs mt-2">Debug: Raw data count: {roster.length}, Filtered count: {filteredDays.length}</p>          </div>
         </div>
       ) : (
         <div className="space-y-3 pb-8">
@@ -170,7 +200,7 @@ const Roster = ({ list, removeVideoFromList }) => {
             >
               {/* Date Header with Copy Button */}
               <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
-                <h3 className="font-semibold text-sm text-gray-900">{day.Date}</h3>
+                <h3 className="section-header text-sm">{day.Date}</h3>
                 <button
                   onClick={() => copyRosterToClipboard(day)}
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-xs transition-all duration-200 ${

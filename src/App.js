@@ -17,7 +17,9 @@ import Login from './pages/login';
 import QuietTime from './pages/quietTime';
 import { useState, useEffect } from 'react';
 import Roster from './pages/roster';
+import RosterLocations from './pages/rosterLocations';
 import Songs from './pages/songs';
+import MemberAnalytics from './pages/memberAnalytics';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
 const ProtectedRoute = ({ children }) => {
@@ -118,9 +120,21 @@ const AppContent = () => {
                     </ProtectedRoute>
                 } />
                 
-                <Route path="/Roster" element={
+                <Route path="/roster-locations" element={
+                    <ProtectedRoute>
+                        <RosterLocations />
+                    </ProtectedRoute>
+                } />
+                
+                <Route path="/roster/:location" element={
                     <ProtectedRoute>
                         <Roster />
+                    </ProtectedRoute>
+                } />
+                
+                <Route path="/Roster" element={
+                    <ProtectedRoute>
+                        <RosterLocations />
                     </ProtectedRoute>
                 } />
                 
@@ -133,6 +147,12 @@ const AppContent = () => {
                 <Route path="/quiet-time" element={
                     <ProtectedRoute>
                         <QuietTime />
+                    </ProtectedRoute>
+                } />
+                
+                <Route path="/analytics" element={
+                    <ProtectedRoute>
+                        <MemberAnalytics />
                     </ProtectedRoute>
                 } />
             </Routes>

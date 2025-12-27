@@ -1,25 +1,25 @@
 {
-  "short_name": "NFC SongDeck",
-  "name": "NFC SongDeck",
+  "short_name": "YLF Worship",
+  "name": "YLF Worship App",
   "icons": [
     {
-      "src": "nfc.png",
+      "src": "ylf-logo.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "nfc.png",
+      "src": "ylf-logo.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "nfc.png",
+      "src": "ylf-logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#000216"
+  "theme_color": "#E23744",
+  "background_color": "#FFFFFF"
 }

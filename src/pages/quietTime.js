@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { FaCamera, FaFire, FaTrophy, FaCalendar, FaUsers, FaTimes, FaBook, FaChartLine, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config/api';
 
 const QuietTime = () => {
   const { user, token, updateUser } = useAuth();
@@ -25,9 +26,9 @@ const QuietTime = () => {
       const headers = { Authorization: `Bearer ${token}` };
       
       const [notesRes, menteesRes, statsRes] = await Promise.all([
-        axios.get('https://us-central1-nfc-worship-app.cloudfunctions.net/api/api/getMyNotes', { headers }),
-        axios.get('https://us-central1-nfc-worship-app.cloudfunctions.net/api/api/getMentees', { headers }),
-        axios.get('https://us-central1-nfc-worship-app.cloudfunctions.net/api/api/getStats', { headers })
+        axios.get(API_ENDPOINTS.MY_NOTES, { headers }),
+        axios.get(API_ENDPOINTS.MENTEES, { headers }),
+        axios.get(API_ENDPOINTS.STATS, { headers })
       ]);
       
       setMyNotes(notesRes.data);
@@ -106,7 +107,7 @@ const QuietTime = () => {
   const fetchMenteeNotes = async (menteeId) => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      const response = await axios.get(`https://us-central1-nfc-worship-app.cloudfunctions.net/api/api/getMenteeNotes/${menteeId}`, { headers });
+      const response = await axios.get(API_ENDPOINTS.MENTEE_NOTES_BY_USER(menteeId), { headers });
       setMenteeNotes(response.data);
       setSelectedMentee(mentees.find(m => m._id === menteeId));
     } catch (error) {
@@ -192,7 +193,7 @@ const QuietTime = () => {
         note: noteText
       };
 
-      await axios.post('https://us-central1-nfc-worship-app.cloudfunctions.net/api/api/uploadQuietTimeNote', payload, {
+      await axios.post(API_ENDPOINTS.UPLOAD_QUIET_TIME, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -297,17 +298,17 @@ const QuietTime = () => {
           <div className="grid grid-cols-3 gap-3 mb-6">
             <div className="bg-white rounded-2xl p-4 text-center shadow-card">
               <FaFire className="text-accent-orange text-2xl mx-auto mb-2" />
-              <div className="text-xl font-bold text-gray-900">{stats.currentStreak || 0}</div>
+              <div className="text-xl font-bold text-black">{stats.currentStreak || 0}</div>
               <div className="text-xs text-gray-500">Current Streak</div>
             </div>
             <div className="bg-white rounded-2xl p-4 text-center shadow-card">
               <FaTrophy className="text-accent-yellow text-2xl mx-auto mb-2" />
-              <div className="text-xl font-bold text-gray-900">{stats.longestStreak || 0}</div>
+              <div className="text-xl font-bold text-black">{stats.longestStreak || 0}</div>
               <div className="text-xs text-gray-500">Best Streak</div>
             </div>
             <div className="bg-white rounded-2xl p-4 text-center shadow-card">
               <FaCalendar className="text-accent-blue text-2xl mx-auto mb-2" />
-              <div className="text-xl font-bold text-gray-900">{stats.totalQuietTimes || 0}</div>
+              <div className="text-xl font-bold text-black">{stats.totalQuietTimes || 0}</div>
               <div className="text-xs text-gray-500">Total Days</div>
             </div>
           </div>
@@ -348,7 +349,7 @@ const QuietTime = () => {
 
           {activeTab === 'upload' && (
             <div className="content-card animate-slide-up">
-              <h3 className="text-lg font-bold text-gray-900 mb-6">Upload Today's Notes</h3>
+              <h3 className="page-header mb-6">Upload Today's Notes</h3>
               
               {!imagePreview ? (
                 <div className="border-2 border-dashed border-gray-200 rounded-2xl p-8 text-center bg-gray-50">
@@ -437,7 +438,7 @@ const QuietTime = () => {
                 return availableNotes.length === 0 ? (
                   <div className="content-card text-center">
                     <FaBook className="text-4xl text-gray-400 mx-auto mb-4" />
-                    <h3 className="font-bold text-gray-900 mb-2">No notes available</h3>
+                    <h3 className="section-header mb-2">No notes available</h3>
                     <p className="text-gray-500 text-sm">
                       {myNotes.length === 0 
                         ? "Start your quiet time journey today!" 
@@ -486,7 +487,7 @@ const QuietTime = () => {
               {!selectedMentee ? (
                 <div className="content-card">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-bold text-gray-900">Select a Mentee</h3>
+                    <h3 className="page-header">Select a Mentee</h3>
                     <button
                       onClick={() => setActiveTab('analytics')}
                       className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-2xl flex items-center justify-center transition-colors duration-200"
@@ -537,7 +538,7 @@ const QuietTime = () => {
                           <FaUsers className="text-white text-sm" />
                         </div>
                         <div>
-                          <h3 className="text-lg font-bold text-gray-900">{selectedMentee.name}'s Notes</h3>
+                          <h3 className="page-header">{selectedMentee.name}'s Notes</h3>
                         </div>
                       </div>
                       <button
@@ -557,7 +558,7 @@ const QuietTime = () => {
                     return availableNotes.length === 0 ? (
                       <div className="content-card text-center">
                         <FaBook className="text-4xl text-gray-400 mx-auto mb-4" />
-                        <h3 className="font-bold text-gray-900 mb-2">No notes available</h3>
+                        <h3 className="section-header mb-2">No notes available</h3>
                         <p className="text-gray-500 text-sm">
                           {menteeNotes.length === 0 
                             ? `${selectedMentee.name} hasn't uploaded any notes yet.`
@@ -621,7 +622,7 @@ const QuietTime = () => {
                     <FaChartLine className="text-white text-lg" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900">Mentee Analytics</h3>
+                    <h3 className="page-header">Mentee Analytics</h3>
                     <p className="text-gray-500 text-sm">Monitor your mentees' progress</p>
                   </div>
                 </div>
@@ -629,7 +630,7 @@ const QuietTime = () => {
                 {mentees.length === 0 ? (
                   <div className="text-center py-8">
                     <FaUsers className="text-4xl text-gray-400 mx-auto mb-4" />
-                    <h4 className="font-bold text-gray-900 mb-2">No mentees yet</h4>
+                    <h4 className="section-header mb-2">No mentees yet</h4>
                     <p className="text-gray-500 text-sm">Start mentoring someone to see their progress here.</p>
                   </div>
                 ) : (
@@ -650,7 +651,7 @@ const QuietTime = () => {
                         >
                           <div className="flex items-start justify-between mb-4">
                             <div>
-                              <h4 className="font-bold text-gray-900">{mentee.name}</h4>
+                              <h4 className="section-header">{mentee.name}</h4>
                               <p className="text-gray-500 text-sm">{mentee.email}</p>
                             </div>
                             <div className={`px-3 py-1 rounded-full text-xs font-medium ${
@@ -670,21 +671,21 @@ const QuietTime = () => {
                                   mentee.currentStreak >= 3 ? 'text-accent-orange' : 'text-gray-400'
                                 }`} />
                               </div>
-                              <div className="text-xl font-bold text-gray-900">{mentee.currentStreak || 0}</div>
+                              <div className="text-xl font-bold text-black">{mentee.currentStreak || 0}</div>
                               <div className="text-xs text-gray-500">Current Streak</div>
                             </div>
                             <div className="text-center">
                               <div className="flex items-center justify-center mb-2">
                                 <FaTrophy className="text-2xl text-accent-yellow" />
                               </div>
-                              <div className="text-xl font-bold text-gray-900">{mentee.longestStreak || 0}</div>
+                              <div className="text-xl font-bold text-black">{mentee.longestStreak || 0}</div>
                               <div className="text-xs text-gray-500">Best Streak</div>
                             </div>
                             <div className="text-center">
                               <div className="flex items-center justify-center mb-2">
                                 <FaCalendar className="text-2xl text-accent-blue" />
                               </div>
-                              <div className="text-xl font-bold text-gray-900">{mentee.totalQuietTimes || 0}</div>
+                              <div className="text-xl font-bold text-black">{mentee.totalQuietTimes || 0}</div>
                               <div className="text-xs text-gray-500">Total Notes</div>
                             </div>
                           </div>

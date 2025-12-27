@@ -9,7 +9,7 @@
   }
   
   body {
-    @apply bg-gray-50 text-gray-900 font-sans antialiased;
+    @apply bg-white text-black font-sans antialiased;
     margin: 0;
     min-height: 100vh;
   }
@@ -25,7 +25,7 @@
   }
   
   .btn-primary {
-    @apply bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-2xl transition-all duration-200;
+    @apply bg-primary hover:bg-red-600 text-secondary font-bold py-3 px-6 rounded-2xl transition-all duration-200;
   }
   
   .btn-secondary {
@@ -37,11 +37,20 @@
   }
   
   .section-header {
-    @apply text-lg font-bold text-gray-900 mb-2;
+    @apply text-lg font-black text-black mb-2;
+  }
+  
+  .page-header {
+    @apply text-2xl font-black text-black mb-4;
+  }
+  
+  .header-white-stroke {
+    @apply text-white font-black;
+    text-shadow: 2px 2px 0 var(--tw-colors-primary), -2px -2px 0 var(--tw-colors-primary), 2px -2px 0 var(--tw-colors-primary), -2px 2px 0 var(--tw-colors-primary);
   }
   
   .page-container {
-    @apply min-h-screen pb-24 px-4 bg-gray-50;
+    @apply min-h-screen pb-24 px-4 bg-white;
   }
   
   .content-card {

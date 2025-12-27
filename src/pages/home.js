@@ -20,7 +20,7 @@ const Home = () => {
       description: "Uplifting songs to glorify God's name",
       icon: <FaMusic className="text-2xl text-white" />,
       route: "/PraiseSongs",
-      bgColor: "bg-gray-900",
+      bgColor: "bg-primary",
       textColor: "text-white"
     },
     {
@@ -29,7 +29,7 @@ const Home = () => {
       description: "Bridge between praise and worship",
       icon: <FaStar className="text-2xl text-white" />,
       route: "/TransitionalSongs",
-      bgColor: "bg-gray-900",
+      bgColor: "bg-primary",
       textColor: "text-white"
     },
     {
@@ -38,7 +38,7 @@ const Home = () => {
       description: "Intimate songs for deeper reverence",
       icon: <FaHeart className="text-2xl text-white" />,
       route: "/CoreWorship", 
-      bgColor: "bg-gray-900",
+      bgColor: "bg-primary",
       textColor: "text-white"
     }
   ];
@@ -51,12 +51,12 @@ const Home = () => {
         <div className="pt-8 pb-6">
           <div className="flex items-center justify-between">
             <div className="text-left">
-              <h1 className="text-xl font-bold text-gray-900">Hello, {user?.name || 'Worship Team'}</h1>
-              <p className="text-gray-500 text-xs mt-2">Today {getCurrentDate()}</p>
+              <h1 className="text-xl font-black text-black">Hello, {user?.name || 'Worship Team'}</h1>
+              <p className="text-gray-600 text-xs mt-2">Today {getCurrentDate()}</p>
             </div>
             <button 
               onClick={logout}
-              className="w-12 h-12 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center transition-colors duration-200"
+              className="w-12 h-12 bg-accent-lightBlue hover:bg-accent-teal/20 rounded-full flex items-center justify-center transition-colors duration-200"
             >
               <FaSignOutAlt className="text-gray-600 text-lg" />
             </button>
@@ -75,7 +75,7 @@ const Home = () => {
             return (
               <div key={day} className="text-center">
                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-2 ${
-                  isToday ? 'bg-gray-900 text-white' : 
+                  isToday ? 'bg-primary text-white' : 
                   isSunday ? 'bg-accent-yellow text-gray-900' : 
                   'bg-white text-gray-500'
                 }`}>
@@ -90,7 +90,7 @@ const Home = () => {
 
       {/* Song Selection Section */}
       <div className="my-16">
-        <h3 className="text-lg font-bold text-gray-900 mb-6 text-left">Select songs for your list</h3>
+        <h3 className="section-header text-left">Select songs for your list</h3>
         <div className="grid grid-cols-2 gap-3">
           {songCategories.map((category, index) => (
             <div
@@ -102,21 +102,21 @@ const Home = () => {
                 {category.icon}
                 <span className="text-white text-xs font-medium">{category.subtitle}</span>
               </div>
-              <h4 className="text-white font-bold text-xs mb-1">{category.title}</h4>
+              <h4 className="header-white-stroke font-bold text-xs mb-1">{category.title}</h4>
               <p className="text-white/80 text-xs">{category.description}</p>
             </div>
           ))}
           
           {/* This Week's Songs Card */}
           <div 
-            className="bg-gray-200 rounded-2xl p-4 cursor-pointer"
+            className="bg-accent-lightBlue rounded-2xl p-4 cursor-pointer hover:bg-accent-teal/10 transition-colors duration-200"
             onClick={() => navigate("/WeeklySongs")}
           >
             <div className="flex items-start justify-between mb-3">
-              <FaCalendarWeek className="text-2xl text-gray-700" />
+              <FaCalendarWeek className="text-2xl text-accent-teal" />
               <span className="text-gray-700 text-xs font-medium">This week</span>
             </div>
-            <h4 className="text-gray-900 font-bold text-xs mb-1">Weekly Songs</h4>
+            <h4 className="text-black font-black text-xs mb-1">Weekly Songs</h4>
             <p className="text-gray-600 text-xs">Access chord sheets</p>
           </div>
         </div>

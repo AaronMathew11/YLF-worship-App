@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import VideoList from '../Components/videoList';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config/api';
 
 const CoreWorship = ({addVideoToList, removeVideoFromList, selectedVideos}) => {
   const [worshipSongs, setWorshipSongs] = useState([]);
@@ -9,7 +10,7 @@ const CoreWorship = ({addVideoToList, removeVideoFromList, selectedVideos}) => {
   useEffect(() => {
     const fetchWorshipSongs = async () => {
       try {
-        const response = await axios.get('https://us-central1-nfc-worship-app.cloudfunctions.net/api/api/getSongsByCategory/Worship');
+        const response = await axios.get(API_ENDPOINTS.SONGS_BY_CATEGORY('Worship'));
         setWorshipSongs(response.data.map(song => ({
           title: song.songName,
           youtubeId: song.youtubeId

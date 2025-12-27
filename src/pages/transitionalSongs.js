@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import VideoList from '../Components/videoList';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config/api';
 
 const TransitionalSongs = ({addVideoToList, removeVideoFromList, selectedVideos}) => {
   const [transitionSongs, setTransitionSongs] = useState([]);
@@ -9,7 +10,7 @@ const TransitionalSongs = ({addVideoToList, removeVideoFromList, selectedVideos}
   useEffect(() => {
     const fetchTransitionalSongs = async () => {
       try {
-        const response = await axios.get('https://us-central1-nfc-worship-app.cloudfunctions.net/api/api/getSongsByCategory/Transitional');
+        const response = await axios.get(API_ENDPOINTS.SONGS_BY_CATEGORY('Transitional'));
         setTransitionSongs(response.data.map(song => ({
           title: song.songName,
           youtubeId: song.youtubeId
