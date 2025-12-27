@@ -1,9 +1,10 @@
 import React from 'react';
 import { FaHome, FaList, FaRegEdit, FaChartBar } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const BottomNav = () => {
-  const isAdmin = true; // Temporarily set to true for dev
+  const { isAdmin } = useAuth();
 
   return (
     <nav className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
