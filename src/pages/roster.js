@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import moment from "moment";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaUsers, FaCalendarAlt, FaSearch, FaCopy, FaCheck, FaArrowLeft, FaHome, FaBuilding } from "react-icons/fa";
@@ -52,7 +52,7 @@ const Roster = ({ list, removeVideoFromList }) => {
       return dateA - dateB;
     });
 
-  const fetchRoster = async () => {
+  const fetchRoster = useCallback(async () => {
     try {
       setLoading(true);
       
@@ -74,12 +74,11 @@ const Roster = ({ list, removeVideoFromList }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [location]);
 
   useEffect(() => {
     fetchRoster();
-  }, [location, fetchRoster]);
-
+  }, [fetchRoster]);
 
   const copyRosterToClipboard = (day) => {
     let rosterText = `Worship Team Roster - ${day.Date}\n\n`;
