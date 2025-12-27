@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 import Home from './pages/home';
 import List from './pages/list';
-import Recomendation from './pages/recomendation';
 import BottomNav from './Components/bottomNav';
 import PraiseSongs from './pages/praiseSongs';
 import CoreWorship from './pages/coreWorship';
@@ -96,11 +95,6 @@ const AppContent = () => {
                     </ProtectedRoute>
                 } />
                 
-                <Route path="/recomend" element={
-                    <ProtectedRoute>
-                        <Recomendation />
-                    </ProtectedRoute>
-                } />
                 
                 <Route path="/CoreWorship" element={
                     <ProtectedRoute>
