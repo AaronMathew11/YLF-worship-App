@@ -19,7 +19,7 @@ const Roster = ({ list, removeVideoFromList }) => {
       home2: { name: "Home 2", icon: <FaHome className="text-lg" />, description: "Worship at home location 2" },
       home3: { name: "Home 3", icon: <FaHome className="text-lg" />, description: "Worship at home location 3" }
     };
-    return locations[locationId] || { name: "Unknown Location", icon: <FaUsers className="text-lg" />, description: "" };
+    return locations[locationId] || { name: "", icon: <FaUsers className="text-lg" />, description: "" };
   };
 
   const filteredDays = roster
